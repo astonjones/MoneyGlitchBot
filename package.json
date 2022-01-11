@@ -1,0 +1,11 @@
+{
+  "name": "moneyglitchbot",
+  "version": "1.0.0",
+  "description": "This is a node app that scans the crypto market and trades based off of algorithms implemented.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aston Jones & Peyton Cornelison",
+  "license": "ISC"
+}
