@@ -1,19 +1,30 @@
 const axios = require('axios');
 
-function tickBTC() {
-  axios.get('https://api.exchange.coinbase.com/products/BTC-USD/ticker')
-  .then(res => { console.log(res.data) })
-  .catch(err => { console.log(err)})
+async function tickBTC() {
+  return await axios.get('https://api.exchange.coinbase.com/products/BTC-USD/ticker')
 }
 
-function statsBTC() {
-  axios.get('https://api.exchange.coinbase.com/products/BTC-USD/stats')
-  .then(res => { return res })
-  .catch(err => { console.log(err)})
+async function statsBTC() {
+  return await axios.get('https://api.exchange.coinbase.com/products/BTC-USD/stats')
 }
 
-function executeTrade() {
-  const result = axios.post()
+async function executeTrade() {
+  const options = {
+    method: 'POST',
+    url: 'https://api.exchange.coinbase.com/orders',
+    headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
+    data: {
+      profile_id: 'default profile_id',
+      type: 'limit',
+      side: 'buy',
+      stp: 'dc',
+      stop: 'loss',
+      time_in_force: 'GTC',
+      cancel_after: 'min',
+      post_only: 'false'
+    }
+  };
+  return await axios.request(options);
 }
 
 module.exports = {
