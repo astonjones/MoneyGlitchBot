@@ -1,11 +1,18 @@
 const axios = require('axios');
 
-async function tickBTC() {
-  return await axios.get('https://api.exchange.coinbase.com/products/BTC-USD/ticker')
+async function tickProduct(product_id) {
+  const response = await axios.get(`https://api.exchange.coinbase.com/products/${product_id}/ticker`)
+  return response.data
 }
 
-async function statsBTC() {
-  return await axios.get('https://api.exchange.coinbase.com/products/BTC-USD/stats')
+async function statsProduct(product_id) {
+  return await axios.get(`https://api.exchange.coinbase.com/products/${product_id}/stats`).then(res => console.log(res.data));
+}
+
+//NEED TO INTAKE (ProductId, granularity, startTime, endTime) as parameters
+async function candleStickProduct(product_id, end, start, gran){
+  const response = await axios.get(`https://api.exchange.coinbase.com/products/${product_id}/candles?granularity=${gran}&start=${start}&end=${end}`)
+  return response.data
 }
 
 async function executeTrade() {
@@ -28,5 +35,6 @@ async function executeTrade() {
 }
 
 module.exports = {
-  tickBTC
+  tickProduct,
+  candleStickProduct
 }
