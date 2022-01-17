@@ -4,7 +4,7 @@ const Candlestick = require('./models/Candlestick');
 const sql = require('./sql');
 
 //Get candleStick data *GRANULARITY SET TO 300*
-async function candleStickTick(product_id, startDate, endDate, table){  
+async function candleStickTick(product_id, startDate, endDate){  
     startDate = await moment(startDate).format();
     endDate = await moment(endDate).format();
 
@@ -12,8 +12,10 @@ async function candleStickTick(product_id, startDate, endDate, table){
 
     var stringDate = moment(endDate).format("YYYY:MM:DD HH:mm:ss");
     var candleStick = new Candlestick(stringDate, data[0]);
-    sql.postETHCandleData(candleStick, table);
+    sql.postETHCandleData(candleStick);
 }
+
+//get candlestick data from 26 periods
 
 module.exports = {
     candleStickTick
