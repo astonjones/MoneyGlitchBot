@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5000
 const server = http.createServer(app).listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 //gets a start date of 
-let startDate = new Date() - 130 * 60000; //Right now - 130 mins
+let startDate = new Date() - 5 * 60000; //Right now - 5 minutes
 let endDate = new Date(); // Right now
 
 startDate = moment(startDate).format();
