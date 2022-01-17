@@ -12,7 +12,6 @@ async function candleStickTick(product_id, startDate, endDate, table){
 
     var stringDate = moment(endDate).format("YYYY:MM:DD HH:mm:ss");
     var candleStick = new Candlestick(stringDate, data[0]);
-    
     sql.postETHCandleData(candleStick, table);
 }
 
