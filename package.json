@@ -15,6 +15,8 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "moment": "^2.29.1",
+    "mongodb": "^4.3.0",
+    "mongoose": "^6.1.7",
     "mssql": "^7.3.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.15"

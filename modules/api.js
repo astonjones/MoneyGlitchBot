@@ -6,7 +6,8 @@ async function tickProduct(product_id) {
 }
 
 async function statsProduct(product_id) {
-  return await axios.get(`https://api.exchange.coinbase.com/products/${product_id}/stats`).then(res => console.log(res.data));
+  const response = await axios.get(`https://api.exchange.coinbase.com/products/${product_id}/stats`)
+  return response.data
 }
 
 //NEED TO INTAKE (ProductId, granularity, startTime, endTime) as parameters
