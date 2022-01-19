@@ -15,8 +15,6 @@ async function candleStickTick(product_id, startDate, endDate, collection){
     await mongoDB.insertCandlestickData(candleStick, collection)
 }
 
-//get candlestick data from 26 periods
-
 module.exports = {
     candleStickTick
 }

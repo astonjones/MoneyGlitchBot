@@ -15,15 +15,15 @@ const app = express();
 const PORT = process.env.PORT || 5000
 const server = http.createServer(app).listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-//gets a start date of 
-let startDate = new Date() - 5 * 60000; //Right now - 5 minutes
-let endDate = new Date(); // Right now
-
-startDate = moment(startDate).format();
-endDate = moment(endDate).format();
-
 //This is the main function -- Right now it logs candlestick data to a mongodb
 async function main(){
+    //gets a start date of 
+    let startDate = new Date() - 5 * 60000; //Right now - 5 minutes
+    let endDate = new Date(); // Right now
+
+    startDate = moment(startDate).format();
+    endDate = moment(endDate).format();
+
     try{ await mongoDB.connectMongoDB() } 
     catch(err){ console.log(`error in main function ${err}`) }
     
