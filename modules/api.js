@@ -11,7 +11,7 @@ async function statsProduct(product_id) {
 }
 
 //NEED TO INTAKE (ProductId, granularity, startTime, endTime) as parameters
-async function candleStickProduct(product_id, end, start, gran){
+async function candleStickProduct(product_id, start, end, gran){
   const response = await axios.get(`https://api.exchange.coinbase.com/products/${product_id}/candles?granularity=${gran}&start=${start}&end=${end}`)
   return response.data
 }
@@ -37,5 +37,6 @@ async function executeTrade() {
 
 module.exports = {
   tickProduct,
+  statsProduct,
   candleStickProduct
 }

@@ -15,6 +15,16 @@ const app = express();
 const PORT = process.env.PORT || 5000
 const server = http.createServer(app).listen(PORT, () => console.log(`Listening on ${PORT}`));
 
+let startDate = new Date() - 5 * 60000; //Right now - 5 minutes
+let endDate = new Date(); // Right now
+
+startDate = moment(startDate).format();
+endDate = moment(endDate).format();
+
+// Check markets every n seconds
+// const POLLING_INTERVAL = process.env.POLLING_INTERVAL || 300000 // 3 Seconds
+// priceMonitor = setInterval(async () => { await main() }, POLLING_INTERVAL)
+
 //This is the main function -- Right now it logs candlestick data to a mongodb
 async function main(){
     //gets a start date of 
@@ -40,8 +50,3 @@ async function main(){
     catch(err) { console.log(`An error in the main function occured: ${err}`) }
     await mongoDB.closeMongoDB();
 }
-
-
-// Check markets every n seconds
-const POLLING_INTERVAL = process.env.POLLING_INTERVAL || 300000 // 3 Seconds
-priceMonitor = setInterval(async () => { await main() }, POLLING_INTERVAL)

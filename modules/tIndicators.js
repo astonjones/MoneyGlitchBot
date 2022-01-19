@@ -65,3 +65,12 @@ function tulindBB(close, period, stddev){
     console.log(`Results 2 is: ${results[2]}`);
   })
 }
+
+module.exports = {
+  tulindSMA,
+  tulindEMA,
+  tulindMACD,
+  tulindRSI,
+  tulindStochOsc,
+  tulindBB
+}
