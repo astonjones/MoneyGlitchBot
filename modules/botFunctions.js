@@ -41,5 +41,6 @@ async function checkData(){
 }
 
 module.exports = {
-    candleStickTick
+    candleStickTick,
+    checkData
 }
