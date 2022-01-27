@@ -13,12 +13,18 @@ const mongoDB = require('./modules/mongoDB');
 const app = express();
 const PORT = process.env.PORT || 5000
 const server = http.createServer(app).listen(PORT, () => console.log(`Listening on ${PORT}`));
+app.use(cors());
 
 // Check markets every n seconds
 // const POLLING_INTERVAL = process.env.POLLING_INTERVAL || 300000
 // priceMonitor = setInterval(async () => { await main() }, POLLING_INTERVAL)
 
-//This is the main function -- Right now it logs candlestick data to a mongo database
+app.get('/SMAData', async function(req, res){
+    const array = await bot.checkData();
+    //const secondArray = await bot.checkData();
+    res.send(array);
+});
+
 async function main(){
 //gets a start date of
 let startDate = new Date() - 5 * 60000; //Right now - 5 minutes
