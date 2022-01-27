@@ -9,7 +9,7 @@ function tulindSMA(close, period){
 }
 
 /*  Exponential Moving Average
-    Type: overlay 
+    Type: overlay
     Input arrays: 1    Options: 1    Output arrays: 1 */
 function tulindEMA(close, period){
   tulind.indicators.ema.indicator([close], [period], function(err, results){

@@ -5,7 +5,7 @@ const mongoDB = require('./mongoDB');
 const tindicators = require('./tIndicators');
 
 //Get candleStick data *GRANULARITY SET TO 300*
-async function candleStickTick(product_id, startDate, endDate, collection){ 
+async function candleStickTick(product_id, startDate, endDate, collection){
     startDate = moment(startDate).format();
     endDate = moment(endDate).format();
 
@@ -19,9 +19,8 @@ async function candleStickTick(product_id, startDate, endDate, collection){
 async function checkData(){
     let close = [];
 
-    // Gather data from API and put in array
-    let startDate = new Date() - 130 * 60000; //Right now - 130 minutes
-    let endDate = new Date(); // Right now
+    let endDate = new Date();
+    let startDate = new Date() - (130) * 60000; // Now - 130 minutes
 
     startDate = moment(startDate).format();
     endDate = moment(endDate).format();
@@ -41,5 +40,6 @@ async function checkData(){
 }
 
 module.exports = {
-    candleStickTick
+    candleStickTick,
+    checkData
 }

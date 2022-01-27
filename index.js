@@ -9,10 +9,13 @@ const coinbaseApi = require('./modules/api.js');
 const Candlestick = require('./modules/models/Candlestick');
 const bot = require('./modules/botFunctions'); //general bot functions module
 const mongoDB = require('./modules/mongoDB');
+const tulind = require('tulind');
 
 const app = express();
 const PORT = process.env.PORT || 5000
 const server = http.createServer(app).listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+bot.checkData();
 
 // Check markets every n seconds
 // const POLLING_INTERVAL = process.env.POLLING_INTERVAL || 300000 // 3 Seconds
@@ -27,11 +30,11 @@ async function main(){
     startDate = moment(startDate).format();
     endDate = moment(endDate).format();
 
-    try{ await mongoDB.connectMongoDB() } 
+    try{ await mongoDB.connectMongoDB() }
     catch(err){ console.log(`error in main function ${err}`) }
     
     try{
-        await bot.candleStickTick('DOGE-USD', startDate, endDate, 'DOGE_Candlestick_Data')
+        await bot.candleStickTick('DOGE-USD', startDate, endDate, 'DOGE_Candlestick_Data');
         await bot.candleStickTick('ETH-USD', startDate, endDate, 'ETH_Candlestick_Data');
         await bot.candleStickTick('ENJ-USD', startDate, endDate, 'ENJ_Candlestick_Data');
         await bot.candleStickTick('GALA-USD', startDate, endDate, 'GALA_Candlestick_Data');
