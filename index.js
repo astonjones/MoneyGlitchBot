@@ -14,21 +14,27 @@ const tulind = require('tulind');
 const app = express();
 const PORT = process.env.PORT || 5000
 const server = http.createServer(app).listen(PORT, () => console.log(`Listening on ${PORT}`));
+app.use(cors());
 
 bot.checkData();
 
 // Check markets every n seconds
-// const POLLING_INTERVAL = process.env.POLLING_INTERVAL || 300000 // 3 Seconds
+// const POLLING_INTERVAL = process.env.POLLING_INTERVAL || 300000
 // priceMonitor = setInterval(async () => { await main() }, POLLING_INTERVAL)
 
-//This is the main function -- Right now it logs candlestick data to a mongodb
-async function main(){
-    //gets a start date of 
-    let startDate = new Date() - 5 * 60000; //Right now - 5 minutes
-    let endDate = new Date(); // Right now
+app.get('/SMAData', async function(req, res){
+    const array = await bot.checkData();
+    //const secondArray = await bot.checkData();
+    res.send(array);
+});
 
-    startDate = moment(startDate).format();
-    endDate = moment(endDate).format();
+async function main(){
+//gets a start date of
+let startDate = new Date() - 5 * 60000; //Right now - 5 minutes
+let endDate = new Date(); // Right now
+
+startDate = moment(startDate).format();
+endDate = moment(endDate).format();
 
     try{ await mongoDB.connectMongoDB() }
     catch(err){ console.log(`error in main function ${err}`) }
@@ -42,7 +48,7 @@ async function main(){
         await bot.candleStickTick('IOTX-USD', startDate, endDate, 'IOTEX_Candlestick_Data');
         await bot.candleStickTick('LINK-USD', startDate, endDate, 'LINK_Candlestick_Data');
         await bot.candleStickTick('LRC-USD', startDate, endDate, 'LRC_Candlestick_Data');
-    } 
+    }
     catch(err) { console.log(`An error in the main function occured: ${err}`) }
     await mongoDB.closeMongoDB();
 }
