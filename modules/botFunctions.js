@@ -19,27 +19,23 @@ async function candleStickTick(product_id, startDate, endDate, collection){
 async function checkData(){
     let closePrices = [];
     let timestamps = [];
-    let period = 3;
 
     let endDate = new Date();
     let startDate = new Date() - (130) * 60000; // Now - 130 minutes
 
     startDate = moment(startDate).format();
     endDate = moment(endDate).format();
-    console.log(`Start date is ${startDate}`);
-    console.log(`End date is ${endDate}`);
 
-    let dataArray = await coinbaseApi.candleStickProduct('BTC-USD', startDate, endDate, 300);
+    let dataArray = await coinbaseApi.candleStickProduct('ETH-USD', startDate, endDate, 300);
 
     //pushed the closing prices
     dataArray.forEach(item =>{
-        timestamps.push(item[0]);
+        timestamps.push(moment.unix(item[0]).format("YYYY:MM:DD HH:mm:ss"));
         closePrices.push(item[4]);
-    })
+    });
 
     //HERE YOU CAN USE DIFFERENT TULIND INDICATORS
     try{
-        // return { timestamps: timestamps.splice((period - 1)), closingPrices: tindicators.tulindSMA(closePrices, period) };
         return { timestamps: timestamps.splice((5 - 1)), closingPrices: tindicators.tulindMACD(closePrices, 2, 5, 9) };
     }catch(err){
         console.log(`Error in checkData Function() -- ${err}`);

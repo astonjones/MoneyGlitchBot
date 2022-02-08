@@ -2,10 +2,10 @@
 
 class Candlestick {
   constructor(timeStamp, [
-    time, low, high, open, close, volume
+    coinbaseTime, low, high, open, close, volume
   ]) {
     this.timeStamp = timeStamp;
-    this.time = time
+    this.coinbaseTime = coinbaseTime
     this.low = low
     this.high = high
     this.open = open
@@ -19,7 +19,7 @@ class Candlestick {
 
   returnArray(){
     return [this.timeStamp,
-      this.time,
+      this.coinbaseTime,
       this.low,
       this.high,
       this.open,
