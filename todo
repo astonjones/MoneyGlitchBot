@@ -1,0 +1,4 @@
+- Implement a MACD strategy
+    - set up a backtest for strategy
+- Implement a stoploss and exit strategy
+- implement buy, sell, and convert functions through coinbase API

@@ -5,7 +5,7 @@ const mongoDB = require('./mongoDB');
 const tindicators = require('./tIndicators');
 
 //Get candleStick data *GRANULARITY SET TO 300*
-async function candleStickTick(product_id, startDate, endDate, collection){
+async function storeCandleStick(product_id, startDate, endDate, collection){
     startDate = moment(startDate).format();
     endDate = moment(endDate).format();
 
@@ -16,27 +16,31 @@ async function candleStickTick(product_id, startDate, endDate, collection){
     await mongoDB.insertCandlestickData(candleStick, collection)
 }
 
+//This is a test function to process price data through TIs
 async function checkData(){
-    let closePrices = [];
+    let output = [];
     let timestamps = [];
+    let period = 5;
 
+    //Initiate dates and format them
     let endDate = new Date();
     let startDate = new Date() - (130) * 60000; // Now - 130 minutes
-
     startDate = moment(startDate).format();
     endDate = moment(endDate).format();
 
-    let dataArray = await coinbaseApi.candleStickProduct('ETH-USD', startDate, endDate, 300);
+    let dataArray = await coinbaseApi.candleStickProduct('BTC-USD', startDate, endDate, 300);
 
     //pushed the closing prices
     dataArray.forEach(item =>{
-        timestamps.push(moment.unix(item[0]).format("YYYY:MM:DD HH:mm:ss"));
-        closePrices.push(item[4]);
-    });
+        timestamps.push(item[0]);
+        output.push(item[4]);
+    })
 
-    //HERE YOU CAN USE DIFFERENT TULIND INDICATORS
     try{
-        return { timestamps: timestamps.splice((5 - 1)), closingPrices: tindicators.tulindMACD(closePrices, 2, 5, 9) };
+        //HERE YOU CAN USE DIFFERENT TULIND INDICATORSx
+
+        // return { timestamps: timestamps.splice((period - 1)), output: tindicators.tulindSMA(output, period) };
+        return { timestamps: timestamps.splice((period - 1)), output: tindicators.tulindMACD(output, 2, 5, 9) };
     }catch(err){
         console.log(`Error in checkData Function() -- ${err}`);
     }
@@ -44,6 +48,6 @@ async function checkData(){
 }
 
 module.exports = {
-    candleStickTick,
+    storeCandleStick,
     checkData
 }
