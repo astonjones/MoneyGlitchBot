@@ -20,7 +20,7 @@ app.use(cors());
 // const POLLING_INTERVAL = process.env.POLLING_INTERVAL || 300000
 // priceMonitor = setInterval(async () => { await main() }, POLLING_INTERVAL)
 
-// function async main() { return stuff};
+// function async main() { return stuff };
 
 app.get('/SMAData', async function(req, res){
     const array = await strategies.MACDStrategy();
