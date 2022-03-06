@@ -14,8 +14,7 @@ async function tulindSMA(close, period){
     Input arrays: 1    Options: 1    Output arrays: 1 */
 async function tulindEMA(close, period){
   let priceResults;
-  await tulind.indicators.ema.indicator([close], [period], function(err, results){
-  });
+  await tulind.indicators.ema.indicator([close], [period], function(err, results){ priceResults = results });
   return priceResults;
 }
 
@@ -36,7 +35,7 @@ async function tulindMACD(close, shortPeriod, longPeriod, signalPeriod){
     Inputs: high, low, close
     Options: %k period, %k slowing period, %d period
     Outputs: stoch_k, stoch_d */
-function tulindStochOsc(high, low, close, kPeriod, slowingPeriod, dPeriod){
+async function tulindStochOsc(high, low, close, kPeriod, slowingPeriod, dPeriod){
   let priceResults;
   await tulind.indicators.stoch.indicator([high, low, close], [kPeriod, slowingPeriod, dPeriod], function(err, results){
     priceResults = results;
@@ -47,7 +46,7 @@ function tulindStochOsc(high, low, close, kPeriod, slowingPeriod, dPeriod){
 /*  Relative Strength Index
     The Relative Strength Index is a momentum oscillator to help identify trends.
     Input arrays: 1    Options: 1    Output arrays: 1 */
-function tulindRSI(close, period){
+async function tulindRSI(close, period){
   let priceResults;
   await tulind.indicators.rsi.indicator([close], [period], function(err, results){
     priceResults = results;

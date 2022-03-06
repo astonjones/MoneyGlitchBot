@@ -26,3 +26,8 @@ app.get('/SMAData', async function(req, res){
     const array = await strategies.MACDStrategy();
     res.send(array);
 });
+
+app.get('/teststrategy', async function(req, res){
+    let data = await strategies.HourlyMACDStrategy()
+    res.send(data);
+});
