@@ -1,7 +1,5 @@
 const moment = require('moment');
-const coinbaseApi = require('./api');
 const Candlestick = require('./models/Candlestick');
-const mongoDB = require('./mongoDB');
 const tindicators = require('./tIndicators');
 
 //Get candleStick data *GRANULARITY SET TO 300*

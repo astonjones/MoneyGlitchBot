@@ -1,6 +1,3 @@
-//This file will contain strategies
-
-const coinbaseApi = require('./api');
 const moment = require('moment');
 const tIndicators = require('./tIndicators');
 
